@@ -3,13 +3,32 @@
  */
 package kyakya.icu.javalin.demo
 
-class App {
-    val greeting: String
-        get() {
-            return "Hello World!"
-        }
+import io.javalin.Javalin
+import kyakya.icu.javalin.demo.config.Modules
+import kyakya.icu.javalin.demo.web.HttpRouter
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import org.koin.core.context.startKoin
+
+class App : KoinComponent {
+    private val app: Javalin = Javalin.create()
+    private val router by inject<HttpRouter>()
+
+    init {
+        router.register(app)
+    }
+
+    fun start() {
+        app.start(7070)
+    }
 }
 
 fun main() {
-    println(App().greeting)
+    // start Koin!
+    startKoin {
+        // declare modules
+        modules(Modules.allModules)
+    }
+
+    App().start()
 }
