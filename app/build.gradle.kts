@@ -19,8 +19,9 @@ repositories {
     mavenCentral()
 }
 
-
-val koin_version = "3.2.0-beta-1"
+// version
+val koin = "3.2.0-beta-1"
+val jackson = "2.13.2"
 
 dependencies {
     // Kotlin
@@ -38,13 +39,14 @@ dependencies {
 
     // DSL
     // Koin Core/test features https://insert-koin.io/docs/setup/v3.2
-    implementation("io.insert-koin:koin-core:$koin_version")
-    testImplementation("io.insert-koin:koin-test:$koin_version")
+    implementation("io.insert-koin:koin-core:$koin")
+    testImplementation("io.insert-koin:koin-test:$koin")
 
     // This dependency is used by the application.
     implementation("com.google.guava:guava:30.1.1-jre")
     implementation("io.javalin:javalin:4.3.0")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.2")
+    implementation("com.fasterxml.jackson.core:jackson-databind:$jackson")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jackson")
     // Log
     implementation("org.slf4j:slf4j-simple:1.7.36")
 }
@@ -53,3 +55,13 @@ application {
     // Define the main class for the application.
     mainClass.set("kyakya.icu.javalin.demo.AppKt")
 }
+
+
+// ref: https://handstandsam.com/2021/06/07/run-custom-gradle-task-after-build/
+tasks.register("saveGitInfo") {
+    doLast {
+        Runtime.getRuntime().exec("bash git-info.sh")
+    }
+}
+tasks.named("build") { finalizedBy("saveGitInfo") }
+

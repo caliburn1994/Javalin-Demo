@@ -1,5 +1,6 @@
 package kyakya.icu.javalin.demo.config
 
+import kyakya.icu.javalin.demo.web.HeathCheckController
 import kyakya.icu.javalin.demo.web.HttpRouter
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -10,7 +11,12 @@ object Modules {
 
     public val configModule = module {
         single {
-            HttpRouter()
+            HttpRouter(get())
+        }
+    }
+    public val healthCheck = module {
+        single {
+            HeathCheckController()
         }
     }
 
