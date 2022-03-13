@@ -23,11 +23,18 @@ repositories {
 val koin_version = "3.2.0-beta-1"
 
 dependencies {
+    // Kotlin
     // Align versions of all Kotlin components
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
-
     // Use the Kotlin JDK 8 standard library.
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    //
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    // Use the Kotlin test library.
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    // Use the Kotlin JUnit integration.
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 
     // DSL
     // Koin Core/test features https://insert-koin.io/docs/setup/v3.2
@@ -37,14 +44,9 @@ dependencies {
     // This dependency is used by the application.
     implementation("com.google.guava:guava:30.1.1-jre")
     implementation("io.javalin:javalin:4.3.0")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.2")
     // Log
     implementation("org.slf4j:slf4j-simple:1.7.36")
-
-    // Use the Kotlin test library.
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-
-    // Use the Kotlin JUnit integration.
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 }
 
 application {

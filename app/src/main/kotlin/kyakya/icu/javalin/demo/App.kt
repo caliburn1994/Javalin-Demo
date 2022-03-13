@@ -27,8 +27,7 @@ fun main() {
     // start Koin!
     startKoin {
         // declare modules
-        modules(Modules.allModules)
+        modules(Modules.getAllModules())
     }
-
     App().start()
 }
