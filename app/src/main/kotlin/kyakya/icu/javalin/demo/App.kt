@@ -11,10 +11,13 @@ import org.koin.core.component.inject
 import org.koin.core.context.startKoin
 
 class App : KoinComponent {
-    private val app: Javalin = Javalin.create()
+    private val app: Javalin;
     private val router by inject<HttpRouter>()
 
     init {
+        app = Javalin.create { config ->
+            config.contextPath = "/api"
+        }
         router.register(app)
     }
 
