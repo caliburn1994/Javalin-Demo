@@ -9,7 +9,7 @@ class HttpRouter(
 ) : KoinComponent {
 
     fun register(app: Javalin) {
-        app.get("/heath") { ctx -> ctx.json(heathCheckController.get()) }
+        app.get("/health") { ctx -> ctx.json(heathCheckController.get()) }
     }
 
 }
