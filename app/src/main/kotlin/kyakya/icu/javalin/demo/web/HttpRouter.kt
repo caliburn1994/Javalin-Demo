@@ -5,11 +5,11 @@ import org.koin.core.component.KoinComponent
 
 class HttpRouter(
     // member fields
-    private val heathCheckController: HeathCheckController
+    private val versionController: VersionController
 ) : KoinComponent {
 
     fun register(app: Javalin) {
-        app.get("/health") { ctx -> ctx.json(heathCheckController.get()) }
+        app.get("/version") { ctx -> ctx.json(versionController.get()) }
     }
 
 }
